@@ -64,3 +64,31 @@ INSERT INTO asteroids.scores (user_id, score_value, date)
 VALUES ((SELECT id FROM users WHERE username = 'Ra1nbowF'), 998091, '2022-02-16');
 INSERT INTO asteroids.scores (user_id, score_value, date)
 VALUES ((SELECT id FROM users WHERE username = 'Ra1nbowF'), 15, '2022-02-16');
+
+-- --------------
+-- Создание ХП --
+-- ----------- --
+
+CREATE PROCEDURE global_top_n(IN n BIGINT)
+BEGIN
+    SELECT * FROM scores ORDER BY score_value DESC LIMIT n;
+END;
+
+
+CREATE PROCEDURE user_top_n(IN n BIGINT, IN username VARCHAR(20))
+BEGIN
+    SELECT * FROM scores WHERE user_id = (SELECT id FROM users WHERE users.username = username) ORDER BY score_value DESC LIMIT n;
+END;
+
+
+CREATE PROCEDURE insert_score_by_username(IN username VARCHAR(20), IN value BIGINT)
+BEGIN
+    DECLARE found_user_id BIGINT;
+
+    IF NOT EXISTS(SELECT * FROM users WHERE users.username = username) THEN
+        INSERT INTO users (users.username) VALUES (username);
+    END IF;
+
+    SELECT id INTO found_user_id FROM users WHERE users.username = username;
+    INSERT INTO scores (user_id, score_value) VALUES (found_user_id, value);
+END;
