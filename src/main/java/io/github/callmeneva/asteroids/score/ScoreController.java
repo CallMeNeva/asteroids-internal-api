@@ -25,10 +25,10 @@ public class ScoreController {
     }
 
     @GetMapping(path = "/top/{n}")
-    public List<ScoreDTO> top(@PathVariable long n, @RequestParam(name = "user", required = false) String username) {
+    public List<ScoreGetDTO> top(@PathVariable long n, @RequestParam(name = "user", required = false) String username) {
         List<Score> scores = (username != null) ? repository.findTopNByUsername(n, username) : repository.findTopN(n);
         return scores.stream()
-                .map(score -> mapper.map(score, ScoreDTO.class))
+                .map(score -> mapper.map(score, ScoreGetDTO.class))
                 .toList();
     }
 }

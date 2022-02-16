@@ -7,7 +7,7 @@ import java.time.LocalDate;
 
 @Data
 @NoArgsConstructor
-public class ScoreDTO {
+public class ScoreGetDTO {
 
     private String username;
     private long value;
