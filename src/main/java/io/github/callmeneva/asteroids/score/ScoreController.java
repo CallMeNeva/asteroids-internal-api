@@ -35,8 +35,8 @@ public class ScoreController {
     }
 
     @GetMapping(path = "/highscores", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<ScoreGetDTO> highscores() {
-        List<Score> scores = service.getHighscores();
+    public List<ScoreGetDTO> highscores(@RequestParam(required = false, defaultValue = "10") long limit) {
+        List<Score> scores = service.getHighscores(limit);
         return scores.stream()
                 .map(score -> mapper.map(score, ScoreGetDTO.class))
                 .toList();

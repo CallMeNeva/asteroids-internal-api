@@ -81,14 +81,17 @@ BEGIN
 END;
 
 
-CREATE PROCEDURE highscores()
+CREATE PROCEDURE highscores(IN lim BIGINT)
 BEGIN
     SELECT
         id,
         user_id,
         MAX(score_value) AS 'score_value',
         date
-    FROM scores GROUP BY user_id ORDER BY score_value DESC;
+    FROM scores
+    GROUP BY user_id
+    ORDER BY score_value DESC
+    LIMIT lim;
 END;
 
 

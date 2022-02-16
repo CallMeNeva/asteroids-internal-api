@@ -24,8 +24,8 @@ public class ScoreService {
         return repository.findTopNByUsername(n, username);
     }
 
-    public List<Score> getHighscores() {
-        return repository.findHighscores();
+    public List<Score> getHighscores(long limit) {
+        return repository.findHighscores(limit);
     }
 
     @Transactional
