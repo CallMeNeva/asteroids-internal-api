@@ -1,10 +1,11 @@
 package io.github.callmeneva.asteroids.score;
 
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,23 +13,27 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/scores", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/scores")
 public class ScoreController {
 
-    private final ScoreRepository repository;
+    private final ScoreService service;
     private final ModelMapper mapper;
 
-    @Autowired
-    public ScoreController(ScoreRepository repository, ModelMapper mapper) {
-        this.repository = repository;
+    public ScoreController(ScoreService service, ModelMapper mapper) {
+        this.service = service;
         this.mapper = mapper;
     }
 
-    @GetMapping(path = "/top/{n}")
-    public List<ScoreGetDTO> top(@PathVariable long n, @RequestParam(name = "user", required = false) String username) {
-        List<Score> scores = (username != null) ? repository.findTopNByUsername(n, username) : repository.findTopN(n);
+    @GetMapping(path = "/top/{n}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<ScoreGetDTO> top(@PathVariable long n, @RequestParam(required = false) String username) {
+        List<Score> scores = (username != null) ? service.getTop(n, username) : service.getTop(n);
         return scores.stream()
                 .map(score -> mapper.map(score, ScoreGetDTO.class))
                 .toList();
+    }
+
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void save(@RequestBody ScorePostDTO data) {
+        service.save(data.getUsername(), data.getValue());
     }
 }
