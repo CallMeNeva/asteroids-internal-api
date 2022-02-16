@@ -16,6 +16,9 @@ public interface ScoreRepository extends JpaRepository<Score, Long> {
     @Query(value = "CALL user_top_n(?1, ?2)", nativeQuery = true)
     List<Score> findTopNByUsername(long n, String username);
 
+    @Query(value = "CALL highscores()", nativeQuery = true)
+    List<Score> findHighscores();
+
     @Modifying
     @Query(value = "CALL insert_score_by_username(?1, ?2)", nativeQuery = true)
     void save(String username, long value);

@@ -24,6 +24,10 @@ public class ScoreService {
         return repository.findTopNByUsername(n, username);
     }
 
+    public List<Score> getHighscores() {
+        return repository.findHighscores();
+    }
+
     @Transactional
     public void save(String username, long value) {
         repository.save(username, value);

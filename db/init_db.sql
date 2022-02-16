@@ -81,6 +81,17 @@ BEGIN
 END;
 
 
+CREATE PROCEDURE highscores()
+BEGIN
+    SELECT
+        id,
+        user_id,
+        MAX(score_value) AS 'score_value',
+        date
+    FROM scores GROUP BY user_id ORDER BY score_value DESC;
+END;
+
+
 CREATE PROCEDURE insert_score_by_username(IN username VARCHAR(20), IN value BIGINT)
 BEGIN
     DECLARE found_user_id BIGINT;
