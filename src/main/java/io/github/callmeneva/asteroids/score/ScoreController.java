@@ -1,6 +1,7 @@
 package io.github.callmeneva.asteroids.score;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +20,7 @@ public class ScoreController {
     private final ScoreService service;
     private final ModelMapper mapper;
 
+    @Autowired
     public ScoreController(ScoreService service, ModelMapper mapper) {
         this.service = service;
         this.mapper = mapper;
