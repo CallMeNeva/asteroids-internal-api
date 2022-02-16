@@ -3,7 +3,6 @@ package io.github.callmeneva.asteroids.score;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,7 +26,6 @@ public class ScoreController {
         this.mapper = mapper;
     }
 
-    @CrossOrigin
     @GetMapping(path = "/top/{n}", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<ScoreGetDTO> top(@PathVariable long n, @RequestParam(required = false) String username) {
         List<Score> scores = (username != null) ? service.getTop(n, username) : service.getTop(n);
@@ -36,7 +34,6 @@ public class ScoreController {
                 .toList();
     }
 
-    @CrossOrigin
     @GetMapping(path = "/highscores", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<ScoreGetDTO> highscores(@RequestParam(required = false, defaultValue = "10") long limit) {
         List<Score> scores = service.getHighscores(limit);
@@ -45,7 +42,6 @@ public class ScoreController {
                 .toList();
     }
 
-    @CrossOrigin
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public void save(@RequestBody ScorePostDTO data) {
         service.save(data.getUsername(), data.getValue());
