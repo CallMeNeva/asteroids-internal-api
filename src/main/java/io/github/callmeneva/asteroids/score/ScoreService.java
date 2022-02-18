@@ -1,14 +1,12 @@
 package io.github.callmeneva.asteroids.score;
 
 import io.github.callmeneva.asteroids.RequestKeyVerifier;
-import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@Log
 @Service
 public class ScoreService {
 
@@ -35,11 +33,8 @@ public class ScoreService {
 
     @Transactional
     public void save(String username, long value, String key) {
-        if (keyVerifier.verify(key, username, Long.toString(value))) {
+        if (keyVerifier.verify(key, username, value)) {
             repository.save(username, value);
-            log.info("Key " + key + " is valid, saved score " + value + " for user " + username);
-        } else {
-            log.warning("Key " + key + " is invalid, score not saved");
         }
     }
 }

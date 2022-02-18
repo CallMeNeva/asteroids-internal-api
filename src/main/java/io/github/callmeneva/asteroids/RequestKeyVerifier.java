@@ -1,23 +1,46 @@
 package io.github.callmeneva.asteroids;
 
-import org.apache.commons.codec.binary.StringUtils;
+import lombok.extern.java.Log;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import java.util.Objects;
+import java.util.StringJoiner;
+import java.util.stream.Stream;
+
+@Log
 @Component
 public class RequestKeyVerifier {
 
     @Value("${request-key-salt}")
     private String salt;
+    @Value("${request-key-delimiter}")
+    private String delimiter;
 
-    public boolean verify(String key, String token) {
-        String saltedToken = (token + salt);
-        String saltedTokenDigest = DigestUtils.md5Hex(saltedToken);
-        return StringUtils.equals(key, saltedTokenDigest);
-    }
+    public boolean verify(String key, Object... tokenFragments) {
+        StringJoiner tokenFragmentsJoiner = new StringJoiner(delimiter);
 
-    public boolean verify(String key, String... tokenParts) {
-        return verify(key, String.join("", tokenParts));
+        Stream.of(tokenFragments)
+                .filter(Objects::nonNull)
+                .map(Object::toString)
+                .forEach(tokenFragmentsJoiner::add);
+
+        if (!salt.isEmpty()) {
+            tokenFragmentsJoiner.add(salt);
+        }
+
+        String token = tokenFragmentsJoiner.toString();
+        String tokenDigest = DigestUtils.md5Hex(token);
+        boolean keysMatch = Objects.equals(key, tokenDigest);
+
+        String message = String.format("Key %s (client: [%s], server: [%s])", (keysMatch ? "match" : "mismatch"), key, tokenDigest);
+        if (keysMatch) {
+            log.info(message);
+        } else {
+            log.warning(message);
+        }
+
+        return keysMatch;
     }
 }
