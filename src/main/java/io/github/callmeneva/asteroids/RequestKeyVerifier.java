@@ -34,13 +34,7 @@ public class RequestKeyVerifier {
         String tokenDigest = DigestUtils.md5Hex(token);
         boolean keysMatch = Objects.equals(key, tokenDigest);
 
-        String message = String.format(
-                "Key %s (client: [%s], server: [%s], token: [%s])",
-                (keysMatch ? "match" : "mismatch"),
-                key,
-                tokenDigest,
-                token
-        );
+       String message = String.format("Client key: [%s], server key: [%s], token: [%s], match: %b", key, tokenDigest, token, keysMatch);
 
         if (keysMatch) {
             log.info(message);
