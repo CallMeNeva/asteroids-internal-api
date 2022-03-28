@@ -25,4 +25,8 @@ public class User {
 
     @Column(name = "username", nullable = false, length = 20, unique = true)
     private String username;
+
+    public static boolean isUsernameValid(String username) {
+        return (username != null) && !username.isBlank() && (username.length() <= MAX_USERNAME_LENGTH);
+    }
 }
