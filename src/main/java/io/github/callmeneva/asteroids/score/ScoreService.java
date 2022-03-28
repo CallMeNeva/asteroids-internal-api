@@ -1,6 +1,8 @@
 package io.github.callmeneva.asteroids.score;
 
 import io.github.callmeneva.asteroids.RequestKeyVerifier;
+import io.github.callmeneva.asteroids.user.User;
+import io.github.callmeneva.asteroids.user.UsernameTooLongException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,6 +35,10 @@ public class ScoreService {
 
     @Transactional
     public void save(String username, long value, String key) {
+        if (username.length() > User.MAX_USERNAME_LENGTH) {
+            throw new UsernameTooLongException(username);
+        }
+
         if (keyVerifier.verify(key, username, value)) {
             repository.save(username, value);
         }
