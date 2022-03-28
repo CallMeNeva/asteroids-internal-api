@@ -16,6 +16,8 @@ import javax.persistence.Table;
 @NoArgsConstructor
 public class User {
 
+    public static final int MAX_USERNAME_LENGTH = 12;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
