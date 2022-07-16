@@ -6,17 +6,17 @@
 
     <modelVersion>4.0.0</modelVersion>
 
+    <groupId>ru.spbstu.edu</groupId>
+    <artifactId>asteroids-internal-api</artifactId>
+    <version>1.0.0</version>
+    <name>Asteroids Internal API</name>
+
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.6.3</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-
-    <groupId>ru.spbstu.edu</groupId>
-    <artifactId>asteroids-internal-api</artifactId>
-    <version>1.0.0</version>
-    <name>Asteroids Internal API</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
