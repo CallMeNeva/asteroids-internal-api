@@ -22,7 +22,6 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>18</java.version>
         <modelmapper.version>3.1.0</modelmapper.version>
-        <commons-codec.version>1.15</commons-codec.version>
     </properties>
 
     <dependencies>
@@ -51,11 +50,6 @@
             <groupId>org.modelmapper</groupId>
             <artifactId>modelmapper</artifactId>
             <version>${modelmapper.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>commons-codec</groupId>
-            <artifactId>commons-codec</artifactId>
-            <version>${commons-codec.version}</version>
         </dependency>
     </dependencies>
 
