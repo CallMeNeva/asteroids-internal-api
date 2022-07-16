@@ -1,3 +1,6 @@
+## `2.0.0-dev`
+Please note that the `master` branch is currently outdated and all development is done [here](https://github.com/CallMeNeva/asteroids-scores-api/tree/2.0.0-dev).
+
 ## Краткое описание
 Данная работа является частью группового проекта по практическому курсу ТРКПО ИКНТ ВШПИ СПбПУ.
 
