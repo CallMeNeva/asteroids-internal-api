@@ -23,6 +23,10 @@ public class Player extends BaseEntity<Integer> {
     @Column(name = "username", length = USERNAME_MAX_LENGTH, nullable = false, unique = true)
     private String username;
 
+    public static boolean isUsernameValid(String username) {
+        return (username != null) && (username.length() <= USERNAME_MAX_LENGTH) && !username.isBlank();
+    }
+
 //    @Override
 //    public boolean equals(Object obj) {
 //    }
@@ -34,9 +38,5 @@ public class Player extends BaseEntity<Integer> {
     @Override
     public String toString() {
         return username;
-    }
-
-    public static boolean isUsernameValid(String username) {
-        return (username != null) && (username.length() <= USERNAME_MAX_LENGTH) && !username.isBlank();
     }
 }
