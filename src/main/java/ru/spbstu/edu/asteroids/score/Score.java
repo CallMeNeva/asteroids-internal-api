@@ -1,38 +1,43 @@
 package ru.spbstu.edu.asteroids.score;
 
-import ru.spbstu.edu.asteroids.user.User;
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import ru.spbstu.edu.asteroids.model.BaseEntity;
+import ru.spbstu.edu.asteroids.player.Player;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import java.time.LocalDate;
 
-@Entity
-@Table(name = "scores", schema = "asteroids")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
-public class Score {
+@AllArgsConstructor
+@Entity
+@Table(name = "scores")
+public class Score extends BaseEntity<Long> {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
-    private long id;
+    @ManyToOne
+    @JoinColumn(name = "player_id", nullable = false)
+    private Player player;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
-    private User user;
-
-    @Column(name = "score_value", nullable = false)
+    @Column(name = "value", nullable = false)
     private long value;
 
-    @Column(name = "date", nullable = false)
-    private LocalDate date;
+//    @Override
+//    public boolean equals(Object obj) {
+//    }
+//
+//    @Override
+//    public int hashCode() {
+//    }
+
+    @Override
+    public String toString() {
+        return Long.toString(value);
+    }
 }
