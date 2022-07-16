@@ -7,9 +7,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>ru.spbstu.edu</groupId>
-    <artifactId>asteroids-internal-api</artifactId>
+    <artifactId>asteroids-scores-api</artifactId>
     <version>1.0.0</version>
-    <name>Asteroids Internal API</name>
+    <name>Asteroids Scores API</name>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
