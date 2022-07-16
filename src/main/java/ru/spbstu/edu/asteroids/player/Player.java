@@ -27,13 +27,7 @@ public class Player extends BaseEntity<Integer> {
         return (username != null) && (username.length() <= USERNAME_MAX_LENGTH) && !username.isBlank();
     }
 
-//    @Override
-//    public boolean equals(Object obj) {
-//    }
-//
-//    @Override
-//    public int hashCode() {
-//    }
+    // TODO: equals and hashCode
 
     @Override
     public String toString() {

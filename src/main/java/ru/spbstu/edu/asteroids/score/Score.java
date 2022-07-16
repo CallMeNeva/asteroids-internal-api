@@ -28,13 +28,7 @@ public class Score extends BaseEntity<Long> {
     @Column(name = "value", nullable = false)
     private long value;
 
-//    @Override
-//    public boolean equals(Object obj) {
-//    }
-//
-//    @Override
-//    public int hashCode() {
-//    }
+    // TODO: equals and hashCode
 
     @Override
     public String toString() {

@@ -21,4 +21,6 @@ public class BaseEntity<I extends Serializable> {
 
     @Column(name = "created_on", nullable = false)
     private LocalDateTime creationDateTime;
+
+    // TODO: equals and hashCode
 }
