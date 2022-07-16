@@ -13,7 +13,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
-    <groupId>io.github.callmeneva</groupId>
+    <groupId>ru.spbstu.edu</groupId>
     <artifactId>asteroids-internal-api</artifactId>
     <version>1.0.0</version>
     <name>Asteroids Internal API</name>
