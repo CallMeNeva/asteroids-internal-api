@@ -1,6 +1,6 @@
-package io.github.callmeneva.asteroids.score;
+package ru.spbstu.edu.asteroids.score;
 
-import io.github.callmeneva.asteroids.user.User;
+import ru.spbstu.edu.asteroids.user.User;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

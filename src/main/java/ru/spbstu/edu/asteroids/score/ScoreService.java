@@ -1,8 +1,8 @@
-package io.github.callmeneva.asteroids.score;
+package ru.spbstu.edu.asteroids.score;
 
-import io.github.callmeneva.asteroids.RequestKeyVerifier;
-import io.github.callmeneva.asteroids.user.User;
-import io.github.callmeneva.asteroids.user.IllegalUsernameException;
+import ru.spbstu.edu.asteroids.RequestKeyVerifier;
+import ru.spbstu.edu.asteroids.user.User;
+import ru.spbstu.edu.asteroids.user.IllegalUsernameException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

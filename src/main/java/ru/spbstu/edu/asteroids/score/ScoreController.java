@@ -1,4 +1,4 @@
-package io.github.callmeneva.asteroids.score;
+package ru.spbstu.edu.asteroids.score;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;

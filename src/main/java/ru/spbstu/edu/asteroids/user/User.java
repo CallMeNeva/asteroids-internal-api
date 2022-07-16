@@ -1,4 +1,4 @@
-package io.github.callmeneva.asteroids.user;
+package ru.spbstu.edu.asteroids.user;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

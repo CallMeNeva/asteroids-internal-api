@@ -1,4 +1,4 @@
-package io.github.callmeneva.asteroids;
+package ru.spbstu.edu.asteroids;
 
 import lombok.extern.java.Log;
 import org.apache.commons.codec.digest.DigestUtils;

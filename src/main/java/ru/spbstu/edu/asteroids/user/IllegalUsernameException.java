@@ -1,4 +1,4 @@
-package io.github.callmeneva.asteroids.user;
+package ru.spbstu.edu.asteroids.user;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

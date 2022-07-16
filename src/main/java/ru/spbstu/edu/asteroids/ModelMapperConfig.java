@@ -1,4 +1,4 @@
-package io.github.callmeneva.asteroids;
+package ru.spbstu.edu.asteroids;
 
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;

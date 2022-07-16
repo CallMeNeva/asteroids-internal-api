@@ -1,4 +1,4 @@
-package io.github.callmeneva.asteroids;
+package ru.spbstu.edu.asteroids;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
