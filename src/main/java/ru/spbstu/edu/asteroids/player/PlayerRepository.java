@@ -14,4 +14,6 @@ public interface PlayerRepository extends JpaRepository<Player, Integer> {
 
     @Query(value = "SELECT * FROM asteroids.players ORDER BY created_on DESC LIMIT 1", nativeQuery = true)
     Optional<Player> findNewest();
+
+    Optional<Player> findByUsername(String username);
 }
