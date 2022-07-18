@@ -9,8 +9,6 @@ import java.util.Optional;
 @Repository
 public interface PlayerRepository extends JpaRepository<Player, Integer> {
 
-    // TODO: Convert native queries to JPQL
-
     @Query(value = "SELECT * FROM asteroids.players ORDER BY created_on ASC LIMIT 1", nativeQuery = true)
     Optional<Player> findOldest();
 
