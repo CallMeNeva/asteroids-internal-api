@@ -1,20 +1,17 @@
 CREATE SCHEMA IF NOT EXISTS asteroids;
 
 CREATE TABLE IF NOT EXISTS asteroids.players (
-    id         SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
-    username   NVARCHAR(20)      NOT NULL, -- Username validation is probably better off being done on the application side
-    created_on TIMESTAMP         NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    username VARCHAR(20) CHARACTER SET 'ascii' NOT NULL, -- Username validation is done on the application side
+    registered_on TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
-    CONSTRAINT pk_players     PRIMARY KEY (id),
-    CONSTRAINT unique_players UNIQUE (username)
+    CONSTRAINT pk_players PRIMARY KEY (username)
 );
 
 CREATE TABLE IF NOT EXISTS asteroids.scores (
-    id         INT      UNSIGNED NOT NULL AUTO_INCREMENT,
-    player_id  SMALLINT UNSIGNED NOT NULL,
-    value      INT      UNSIGNED NOT NULL,
-    created_on TIMESTAMP         NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    value INT UNSIGNED NOT NULL,
+    player_username VARCHAR(20) CHARACTER SET 'ascii' NOT NULL,
+    published_on TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
-    CONSTRAINT pk_scores         PRIMARY KEY (id),
-    CONSTRAINT fk_scores_players FOREIGN KEY (player_id) REFERENCES players (id)
+    CONSTRAINT pk_scores PRIMARY KEY (value, player_username, published_on),
+    CONSTRAINT fk_scores_players FOREIGN KEY (player_username) REFERENCES players (username)
 );
