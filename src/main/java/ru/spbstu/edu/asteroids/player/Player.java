@@ -1,33 +1,53 @@
 package ru.spbstu.edu.asteroids.player;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import ru.spbstu.edu.asteroids.model.BaseEntity;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.Objects;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name = "players")
-public class Player extends BaseEntity<Integer> {
+public class Player {
 
     private static final byte USERNAME_MAX_LENGTH = 20;
 
-    @Column(name = "username", length = USERNAME_MAX_LENGTH, nullable = false, unique = true)
+    @Id
+    @Column(name = "username", length = USERNAME_MAX_LENGTH, nullable = false)
     private String username;
 
-    public static boolean isUsernameValid(String username) {
-        return (username != null) && (username.length() <= USERNAME_MAX_LENGTH) && !username.isBlank();
+    public Player(String username) {
+        if ((username == null) || (username.length() > USERNAME_MAX_LENGTH) || username.isBlank()) {
+            throw IllegalPlayerUsernameException.forUsername(username);
+        }
+
+        this.username = username;
     }
 
-    // TODO: equals and hashCode
+    protected Player() {
+        // 'protected' as a compromise between invariants and JPA compliance
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+
+        if (obj == null || getClass() != obj.getClass())
+            return false;
+
+        Player player = (Player) obj;
+        return Objects.equals(username, player.username);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(username);
+    }
 
     @Override
     public String toString() {

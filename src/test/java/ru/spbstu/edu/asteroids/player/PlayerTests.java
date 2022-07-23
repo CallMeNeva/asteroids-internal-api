@@ -5,7 +5,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.assertj.core.api.Assertions.assertThatNoException;
 
 class PlayerTests {
 
@@ -14,38 +15,22 @@ class PlayerTests {
 
         // Things to ensure:
         // 1. Not null
-        // 2. Not empty
+        // 2. Not blank
         // 3. Length <= 20
-        // 4. Alphanumeric chars only (no whitespace, non-ASCII allowed)
 
         @ParameterizedTest
         @NullAndEmptySource
-        @ValueSource(strings = {
-                "ThisHasMoreThan20Characters",
-                "this has spaces",
-                "this\thas\ttabs",
-                "separate\nlines",
-                "with_underscores",
-                "with-hyphens",
-                "with+pluses",
-                "\"Escaped\"Chars",
-                "   "
-        })
-        void rejectsInvalid(String username) {
-            assertThat(Player.isUsernameValid(username)).isFalse();
+        @ValueSource(strings = {"   ", "\t", "\t \n", "ThisHasMoreThan20Characters"})
+        void rejectsIllegal(String username) {
+            assertThatExceptionOfType(IllegalPlayerUsernameException.class).isThrownBy(() -> new Player(username));
         }
 
         @ParameterizedTest
-        @ValueSource(strings = {
-                "lowercase",
-                "UPPERCASE",
-                "TwentyCharsMixedCase",
-                "WithNumbers01",
-                "1234567890",
-                "ЗаПределамиASCII"
-        })
-        void acceptsValid(String username) {
-            assertThat(Player.isUsernameValid(username)).isTrue();
+        @ValueSource(strings = {"lower", "UPPER", "TwentyCharsMixedCase", "1234567890", "ЗаПределамиASCII", "with whitespace"})
+        void acceptsLegal(String username) {
+            assertThatNoException().isThrownBy(() -> new Player(username));
         }
     }
+
+    // TODO: equals and hashCode contract tests
 }
