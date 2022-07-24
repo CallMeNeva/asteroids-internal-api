@@ -24,7 +24,6 @@
 
         <java.version>18</java.version>
         <modelmapper.version>3.1.0</modelmapper.version>
-        <guava.version>31.1-jre</guava.version>
     </properties>
 
     <dependencies>
@@ -57,18 +56,9 @@
 
         <!-- Utilities -->
         <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-        </dependency>
-        <dependency>
             <groupId>org.modelmapper</groupId>
             <artifactId>modelmapper</artifactId>
             <version>${modelmapper.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>${guava.version}</version>
         </dependency>
     </dependencies>
 
