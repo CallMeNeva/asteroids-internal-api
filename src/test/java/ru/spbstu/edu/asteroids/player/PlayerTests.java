@@ -32,5 +32,8 @@ class PlayerTests {
         }
     }
 
-    // TODO: equals and hashCode contract tests
+    @Nested
+    class EqualsAndHashCode {
+        // TODO
+    }
 }
