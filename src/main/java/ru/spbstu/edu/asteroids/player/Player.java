@@ -16,7 +16,7 @@ public class Player {
     @Column(name = "username", length = USERNAME_MAX_LENGTH, nullable = false)
     private String username;
 
-    public Player(String username) {
+    public Player(String username) throws IllegalPlayerUsernameException {
         if ((username == null) || (username.length() > USERNAME_MAX_LENGTH) || username.isBlank()) {
             throw IllegalPlayerUsernameException.forUsername(username);
         }
