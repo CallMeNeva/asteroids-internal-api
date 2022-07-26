@@ -17,7 +17,8 @@ public class Player {
     private String username;
 
     public Player(String username) throws IllegalPlayerUsernameException {
-        if ((username == null) || (username.length() > USERNAME_MAX_LENGTH) || username.isBlank()) {
+        Objects.requireNonNull(username);
+        if (username.length() > USERNAME_MAX_LENGTH || username.isBlank()) {
             throw IllegalPlayerUsernameException.forUsername(username);
         }
 
