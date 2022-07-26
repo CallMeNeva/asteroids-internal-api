@@ -18,13 +18,8 @@ public class PlayerService {
     }
 
     public void register(String username) throws IllegalPlayerUsernameException {
-        try {
-            Player player = new Player(username);
-            repository.save(player);
-            LOG.info("Registered player: " + username);
-        } catch (IllegalPlayerUsernameException e) {
-            LOG.warn("Failed to register player: " + username + " (illegal username)");
-            throw e;
-        }
+        Player player = new Player(username); // Delegate exception handling to Player constructor (both NPE and IPUE)
+        repository.save(player);
+        LOG.info("Registered player: " + username);
     }
 }
