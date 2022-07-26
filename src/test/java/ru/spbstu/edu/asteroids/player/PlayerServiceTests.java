@@ -3,14 +3,14 @@ package ru.spbstu.edu.asteroids.player;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.NullAndEmptySource;
-import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.jupiter.params.provider.ArgumentsSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.assertj.core.api.Assertions.assertThatNoException;
+import static org.assertj.core.api.Assertions.assertThatNullPointerException;
 import static org.assertj.core.api.Assumptions.assumeThatCode;
 
 @SpringBootTest
@@ -26,16 +26,20 @@ class PlayerServiceTests {
     class Registration {
 
         @ParameterizedTest
-        @NullAndEmptySource
-        @ValueSource(strings = {"   ", "\t", "\t \n", "ThisHasMoreThan20Characters"})
+        @ArgumentsSource(LegalUsernameArgumentsProvider.class)
+        void acceptsLegalUsername(String legalUsername) {
+            assertThatNoException().isThrownBy(() -> service.register(legalUsername));
+        }
+
+        @ParameterizedTest
+        @ArgumentsSource(IllegalUsernameArgumentsProvider.class)
         void rejectsIllegalUsername(String illegalUsername) {
             assertThatExceptionOfType(IllegalPlayerUsernameException.class).isThrownBy(() -> service.register(illegalUsername));
         }
 
-        @ParameterizedTest
-        @ValueSource(strings = {"lower", "UPPER", "TwentyCharsMixedCase", "1234567890", "ЗаПределамиASCII", "with whitespace"})
-        void acceptsLegalUsername(String legalUsername) {
-            assertThatNoException().isThrownBy(() -> service.register(legalUsername));
+        @Test
+        void rejectsNullUsername() {
+            assertThatNullPointerException().isThrownBy(() -> service.register(null));
         }
 
         @Test
