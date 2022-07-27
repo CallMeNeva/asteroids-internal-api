@@ -26,7 +26,7 @@ public class Player {
     }
 
     protected Player() {
-        // 'protected' as a compromise between invariants and JPA compliance
+        // JPA spec requirement
     }
 
     public String getUsername() {
