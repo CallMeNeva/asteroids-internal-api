@@ -11,6 +11,6 @@ CREATE TABLE IF NOT EXISTS asteroids.scores (
     player_username NVARCHAR(20) NOT NULL,
     achieved_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
-    CONSTRAINT pk_scores PRIMARY KEY (value, player_username, achieved_at),
+    CONSTRAINT pk_scores PRIMARY KEY (player_username, achieved_at),
     CONSTRAINT fk_scores_players FOREIGN KEY (player_username) REFERENCES players (username)
 );
